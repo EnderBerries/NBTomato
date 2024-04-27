@@ -88,6 +88,6 @@ def loot_table(filePath = None):
                 jsonpointer += 1
 
 
-item_modifier(r"C:\Users\65961\Desktop\Python\datapack_update24w09a\s.json")
+#item_modifier(r"C:\Users\65961\Desktop\Python\datapack_update24w09a\s.json")
 # reporter.reporter.Error("Not supported type,at "+globalStorage.thisFile,path=globalStorage.thisFile,logp="jsonFiles")
 #reporter.reporter.done()

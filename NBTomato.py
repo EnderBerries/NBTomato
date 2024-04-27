@@ -129,11 +129,12 @@ def OneFileReadAndWrite(FilePath,FileType):
 # debug("reporter.reporter.init","()")
 # debug("reporter.reporter.log","('Info2')")
 
-inpfile = input(">>>")
-OneFileReadAndWrite(inpfile,"LOOTTABLE")
-reporter.reporter.done()
+# inpfile = input(">>>")
+# OneFileReadAndWrite(inpfile,"LOOTTABLE")
+# reporter.reporter.done()
 
-if __name__ == "__mai1n__":
+if __name__ == "__main__":
+    #get_files("<YOUR pack.mcmeta>")
     get_data()
     for i in namespaces:
         reporter.reporter.log(f"Updateing namespace '{i}'")
