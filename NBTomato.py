@@ -43,7 +43,7 @@ data = {
     "FilePaths":{}
 }
 
-mcmetaPath = input(globalStorage.GetTranslation("zh_cn","trans.main.get_mcmeta_path"))
+mcmetaPath = input(globalStorage.GetTranslation("trans.main.get_mcmeta_path"))
 
 
 #mcmetaPath = r"D:\mc\PCL\.minecraft\saves\PortalTestA\datapacks\Darkplace\pack.mcmeta"
