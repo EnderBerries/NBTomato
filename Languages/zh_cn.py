@@ -2,7 +2,22 @@ Lang="zh_cn"
 translation={
     "zh_cn":{
         "trans.pack.name":"简体中文",
+        "trans.exit":"已退出",
         "trans.finished_change_language":"成功设置语言",
         "trans.main.get_mcmeta_path":"请输入pack.mcmeta文件路径：",
+        "trans.ui.input":">>>",
+        "trans.ui.on":"开:1",
+        "trans.ui.off":"关:2",
+        "trans.ui.menu":"输入对应代码执行你想要的操作",
+        "trans.ui.not_allow":"请输入允许的值",
+        "trans.ui.menu.settings":"设置:1",
+        "trans.ui.menu.update":"升级数据包:2",
+        "trans.ui.menu.exit":"退出:3",
+        "trans.ui.menu.settings.languages":"语言:1",
+        "trans.ui.menu.settings.show_detailed_info":"显示详细信息:2",
+        "trans.ui.menu.settings.back":"返回:3",
+        "trans.ui.saved":"已保存！",
+        "trans.ui.not_saved":"未做任何更改！",
+
     }
 }

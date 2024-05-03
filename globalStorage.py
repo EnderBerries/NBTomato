@@ -27,6 +27,9 @@ def init():
     else:
         lang = config["language"]
 
+    if "ShowDetailedInfo" not in config:
+        SetConfig("ShowDetailedInfo",False)
+
 def GetTranslation(key):
     if key in translation[lang]:
         return translation[lang][key]

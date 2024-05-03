@@ -1,54 +1,51 @@
 import os
 import reporter
-import itemData
-import blockEntityData
-import entityData
 import jsonFiles
-import NBTPath
 import update
 import globalStorage
 
-reporter.reporter.init()
-globalStorage.init()
+
 #C:\Users\65961\Desktop\Python\datapack_update24w09a
-report = ()
 #总进度:
-all_ex = [
-    #"item",
-    #"execute"
-    #"give"
-    #"#",
-    #"其他命令"
-    #"loot",
-    #"attribute",
-    "data",
-    #"summon",
-    "战利品表谓词",
-    "战利品表",
-    "配方",
-]
-
-data = {
-    "paths":{
-        "functions":"data\\$namespace$\\functions",
-        "advancements":"data\\$namespace$\\advancements",
-        "lootTables":"data\\$namespace$\\loot_tables",
-        "predicates":"data\\$namespace$\\predicates",
-        "itemModifiers":"data\\$namespace$\\item_modifiers",
-        "feature":"data\\$namespace$\\worldgen\\configured_feature",
-        "placedFeature":"data\\$namespace$\\worldgen\\placed_feature",
-        "recipes":"data\\$namespace$\\worldgen\\biome"
-    },
-    "functions":[],
-    "FilePaths":{}
-}
-
-mcmetaPath = input(globalStorage.GetTranslation("trans.main.get_mcmeta_path"))
+# all_ex = [
+#     #"item",
+#     #"execute"
+#     #"give"
+#     #"#",
+#     #"其他命令"
+#     #"loot",
+#     #"attribute",
+#     "data",
+#     #"summon",
+#     #"战利品表谓词",
+#     #"战利品表",
+#     "配方",
+# ]
 
 
-#mcmetaPath = r"D:\mc\PCL\.minecraft\saves\PortalTestA\datapacks\Darkplace\pack.mcmeta"
-dataPath = os.path.dirname(mcmetaPath)
-namespaces = os.listdir(os.path.join(dataPath,"data"))#获取命名空间
+def begin_step():
+    global data
+    reporter.reporter.init()
+    data = {
+        "paths":{
+            "functions":"data\\$namespace$\\functions",
+            "advancements":"data\\$namespace$\\advancements",
+            "lootTables":"data\\$namespace$\\loot_tables",
+            "predicates":"data\\$namespace$\\predicates",
+            "itemModifiers":"data\\$namespace$\\item_modifiers",
+            "feature":"data\\$namespace$\\worldgen\\configured_feature",
+            "placedFeature":"data\\$namespace$\\worldgen\\placed_feature",
+            "recipes":"data\\$namespace$\\worldgen\\biome"
+        },
+        "functions":[],
+        "FilePaths":{}
+    }
+    global mcmetaPath
+    global dataPath
+    global namespaces
+    mcmetaPath = input(globalStorage.GetTranslation("trans.main.get_mcmeta_path"))
+    dataPath = os.path.dirname(mcmetaPath)
+    namespaces = os.listdir(os.path.join(dataPath,"data"))#获取命名空间
 
 
 
@@ -133,8 +130,9 @@ def OneFileReadAndWrite(FilePath,FileType):
 # OneFileReadAndWrite(inpfile,"LOOTTABLE")
 # reporter.reporter.done()
 
-if __name__ == "__main__":
+def main():
     #get_files("<YOUR pack.mcmeta>")
+    begin_step()
     get_data()
     for i in namespaces:
         reporter.reporter.log(f"Updateing namespace '{i}'")
@@ -159,3 +157,9 @@ if __name__ == "__main__":
                 OneFileReadAndWrite(s,"LOOTTABLE")
         else:
             reporter.reporter.log(f">Not found loot-tables in namespace '{i}'")
+
+if __name__ == "__main__":
+    globalStorage.init()
+    import ui
+    app = ui.tui()
+    app.main()
