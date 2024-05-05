@@ -1,5 +1,5 @@
 Lang="en_us"
-translation_en = {  
+translation = {  
     "en_us": {  
         "trans.pack.name": "English (US)",  
         "trans.exit": "Exited",  
