@@ -14,10 +14,9 @@ translation={
         "trans.ui.menu.update":"升级数据包:2",
         "trans.ui.menu.exit":"退出:3",
         "trans.ui.menu.settings.languages":"语言:1",
-        "trans.ui.menu.settings.show_detailed_info":"显示详细信息:2",
+        "trans.ui.menu.settings.show_detailed_info":"是否显示详细信息:2",
         "trans.ui.menu.settings.back":"返回:3",
         "trans.ui.saved":"已保存！",
         "trans.ui.not_saved":"未做任何更改！",
-
     }
 }
