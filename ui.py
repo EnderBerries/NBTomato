@@ -1,12 +1,15 @@
 '''
 临时使用tui
 '''
-import globalStorage
 import os
+import NBTomato
+import globalStorage
+
 
 class tui:
     def __init__(self):
-        self.reg={
+        self.startUpdateTask = False
+        self.reg={      #ui注册表
             "main":[
                 "trans.ui.menu",
                 "trans.ui.menu.settings",
@@ -73,14 +76,15 @@ class tui:
         self.menu("main")
      
     def settings(self):
-        self.menu("settings")
-        if self.choose != self.reg["allows"]["settings"][-1]:
-            self.settings()
-        else:
-            self.main()#返回
+        if self.startUpdateTask == False:
+            self.menu("settings")
+            if self.choose != self.reg["allows"]["settings"][-1]:
+                self.settings()
+            else:
+                self.main()#返回
 
     def update(self):
-        import NBTomato
+        self.startUpdateTask = True
         NBTomato.main()
 
     def exit_(self):
@@ -88,12 +92,13 @@ class tui:
         exit()
 
     def show_detailed_info(self):
-        self.menu("show_detailed_info")
-        if self.choose != self.reg["allows"]["show_detailed_info"][-1]:
-            print(globalStorage.GetTranslation("trans.ui.saved"))
-        else:
-            print(globalStorage.GetTranslation("trans.ui.not_saved"))
-        self.settings()
+        if self.startUpdateTask == False:
+            self.menu("show_detailed_info")
+            if self.choose != self.reg["allows"]["show_detailed_info"][-1]:
+                print(globalStorage.GetTranslation("trans.ui.saved"))
+            else:
+                print(globalStorage.GetTranslation("trans.ui.not_saved"))
+            self.settings()
 
 if __name__ == "__main__":
     a = tui()

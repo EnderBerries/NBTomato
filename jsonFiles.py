@@ -40,7 +40,7 @@ def imp(itemModifier = None):
 
 
 def item_modifier(filePath = None,dictinp="{}",mode="w"):
-    if filePath == None:
+    if filePath == None and mode == "w":
         pass
     else:
         if mode == "w":
@@ -79,15 +79,18 @@ def loot_table(filePath = None):
             for s in lootTable["pools"]:
                 if "functions" in s:
                     lootTable["pools"][jsonpointer]["functions"] = item_modifier(dictinp=lootTable["pools"][jsonpointer]["functions"] ,mode="r")
-                    entriespointer = 0
-                    if "entries" in s:
-                        for s2 in lootTable["pools"][jsonpointer]["entries"]:
-                            if "functions" in s2:
-                                lootTable["pools"][jsonpointer]["entries"][entriespointer]["functions"] = item_modifier(dictinp=lootTable["pools"][jsonpointer]["entries"][entriespointer]["functions"] ,mode="r")
-                            entriespointer += 1
+                entriespointer = 0
+                if "entries" in s:
+                    for s2 in lootTable["pools"][jsonpointer]["entries"]:
+                        if "functions" in s2:
+                            lootTable["pools"][jsonpointer]["entries"][entriespointer]["functions"] = item_modifier(dictinp=lootTable["pools"][jsonpointer]["entries"][entriespointer]["functions"] ,mode="r")
+                        entriespointer += 1
                 jsonpointer += 1
+        with open(filePath,'w') as f:
+            f.write(json.dumps(lootTable,indent=4))
+            f.close()
 
 
-#item_modifier(r"C:\Users\65961\Desktop\Python\datapack_update24w09a\s.json")
+#loot_table(input())
 # reporter.reporter.Error("Not supported type,at "+globalStorage.thisFile,path=globalStorage.thisFile,logp="jsonFiles")
 #reporter.reporter.done()

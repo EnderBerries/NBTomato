@@ -5,23 +5,6 @@ import update
 import globalStorage
 
 
-#C:\Users\65961\Desktop\Python\datapack_update24w09a
-#总进度:
-# all_ex = [
-#     #"item",
-#     #"execute"
-#     #"give"
-#     #"#",
-#     #"其他命令"
-#     #"loot",
-#     #"attribute",
-#     "data",
-#     #"summon",
-#     #"战利品表谓词",
-#     #"战利品表",
-#     "配方",
-# ]
-
 
 def begin_step():
     global data
@@ -85,8 +68,9 @@ def OneFileReadAndWrite(FilePath,FileType):
                     listpointer += 1
                 
                 for functionGet in functionsRem:#进行版本更新
-                    ret = update.exec_ccmd(functionGet)
-                    functionsOut.append(ret)
+                    if not (functionGet == "" or functionGet == None):
+                        ret = update.exec_ccmd(functionGet)
+                        functionsOut.append(ret)
                 
                 f.close()
 
@@ -94,7 +78,7 @@ def OneFileReadAndWrite(FilePath,FileType):
                 for function in functionsOut:
                     f.write(function+"\n")
                 f.close()
-        except:
+        except ValueError:
             pass
     
     elif FileType == "ITEMMODIFIER":
@@ -134,6 +118,7 @@ def main():
     #get_files("<YOUR pack.mcmeta>")
     begin_step()
     get_data()
+    reporter.reporter.ShowDetailedInfo = globalStorage.config["ShowDetailedInfo"]
     for i in namespaces:
         reporter.reporter.log(f"Updateing namespace '{i}'")
 
@@ -157,6 +142,7 @@ def main():
                 OneFileReadAndWrite(s,"LOOTTABLE")
         else:
             reporter.reporter.log(f">Not found loot-tables in namespace '{i}'")
+    reporter.reporter.done()
 
 if __name__ == "__main__":
     globalStorage.init()

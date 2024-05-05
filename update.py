@@ -32,6 +32,14 @@ def commandInit(inp_command = ""):
             command_type = "clear"
         elif command[0] == "summon":
             command_type = "summon"
+        elif command[0] == "data":
+            command_type = "not_supported"
+        elif command[0] == "particle":
+            command_type = "not_supported"
+        elif command[0] == "set_block":
+            command_type = "not_supported"
+        elif command[0] == "fill":
+            command_type = "not_supported"
         elif command[0] == "#":
             command_type = "pass"
         else:
@@ -43,8 +51,8 @@ def commandInit(inp_command = ""):
         commands_in_file[sid]["type"] = command_type
         return sid
     else:
-        reporter.reporter.Error(f"Command init error,at'{inp_command}',at{globalStorage.thisFile}",logp="update",path=globalStorage.thisFile)
-        return "Fail"
+        #reporter.reporter.Error(f"Command init error,at'{inp_command}',at{globalStorage.thisFile}",logp="update",path=globalStorage.thisFile)
+        return "Fail:a none type line"
 
 def exec_ccmd(cmd = None):
     if cmd == None:
@@ -66,6 +74,10 @@ def exec_ccmd(cmd = None):
             return summon(sid)
         elif commandType == "common":
             return common_command(sid)
+        elif commandType == "not_supported":
+            rem = commands_in_file[sid]["raw"]
+            reporter.reporter.warn(f"Not supported command type at '{rem}', at {globalStorage.thisFile}","Main",globalStorage.thisFile)
+            return commands_in_file[sid]["raw"]
         elif commandType == "pass":
             return commands_in_file[sid]["raw"]
 
@@ -227,7 +239,7 @@ def loot(sid = None):
                     else:
                         to = cmd[7:]
                 elif cmd[2] == "entity":
-                    target += "entity " + entityData.target_selector(cmd[3]) + cmd[4]
+                    target += "entity " + entityData.target_selector(cmd[3]) + " " + cmd[4]
                     try:
                         int(cmd[5])
                         has_count = True
@@ -495,4 +507,4 @@ if __name__ == "__main__":
     #print(common_command(sid))
     #sid = commandInit("execute if entity @s[nbt={item:{Count:15b,id:'minecraft:grass_block'}}] run give @s diamond{Unbreakable:1b} 1")
     #print(exec_ccmd("summon creeper ~ ~ ~ {item:{id:'glass',Count:114514b}}"))
-    #print(exec_ccmd("execute if data entity @s Items[0].tag.Unbreakable run say 1"))
+    exec_ccmd("give @s acacia_boat{AttributeModifiers:[{\"AttributeName\":\"generic.attack_damage\",\"Name\":\"abc\"}]}")

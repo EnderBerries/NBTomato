@@ -2,9 +2,10 @@ import os
 import time
 import zipfile
 import json
+
 class Reporter:
     def __init__(self) -> None:
-        pass
+        self.ShowDetailedInfo = True
     def init(self,path = None) -> None:#必须手动执行
         if path == None:
             self.path = os.getcwd() + "\\Output Reporter"
@@ -34,8 +35,9 @@ class Reporter:
     def log(self,loginfo = "None",logat = "Main",logtype = "INFO",logwrapper = "[]"):
         logtime = logwrapper[0] + time.strftime("%H-%M-%S") + logwrapper[1]
         logInfo = logwrapper[0] + logat + "/" + logtype + logwrapper[1] + ": " + loginfo
-        self.latest.write(logtime+logInfo+"\n")
-        print(logtime+logInfo)
+        if self.ShowDetailedInfo == False and logtype != "Warn" and logtype != "Error":#简化时不显示Info
+            self.latest.write(logtime+logInfo+"\n")
+            print(logtime+logInfo)
 
     def warn(self,warnInfo="",logp="Main",path=""):
         self.log(warnInfo,logat=logp,logtype="Warn")
@@ -55,7 +57,6 @@ class Reporter:
         with open(self.path+"\\WarningReport.json","w") as warn:
             warn.write(json.dumps(self.warnList,indent=4))
             warn.close()
-
 
 reporter = Reporter()
 if __name__ == "__main__":

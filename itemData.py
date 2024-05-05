@@ -861,7 +861,7 @@ def updateNBT(mode, value, connect = "=" ,hs = None):
         elif mode == "display":                                             #display
             #print(value)
             temp = value[1:-1]
-            getNBTList(temp)
+            NBTList = getNBTList(temp)
             #print(NBTList)
             output = []
             for i in NBTList:
@@ -891,29 +891,29 @@ def updateNBT(mode, value, connect = "=" ,hs = None):
             #print(temp2)
             modifiers  = ""
             for i in temp2:
-                getNBTList(i)
+                NBTList = getNBTList(i)
+                #print(NBTList,"############")
                 #print(NBTList)
                 modifier = "{"
                 for s in NBTList:
                     handle_nbt = s.split(":",1)
-                    #print(s)
-                    if handle_nbt[0] == "UUID":
-                        modifier += "uuid:"+ handle_nbt[1] + ","
-                    elif handle_nbt[0] == "Operation":
+                    if handle_nbt[0][1:-1] == "UUID" or handle_nbt[0] == "UUID":
+                        modifier += "\"uuid\":"+ handle_nbt[1] + ","
+                    elif handle_nbt[0][1:-1] == "Operation" or handle_nbt[0] == "Operation":
                         if handle_nbt[1] == "0":
-                            modifier += "operation:'add_value',"
+                            modifier += "\"operation\":'add_value',"
                         elif handle_nbt[1] == "1":
-                            modifier += "operation:'add_multiplied_base',"
+                            modifier += "\"operation\":'add_multiplied_base',"
                         elif handle_nbt[1] == "2":
-                            modifier += "operation:'add_multiplied_total',"
-                    elif handle_nbt[0] == "Name":
-                        modifier += "name:"+ handle_nbt[1] + ","
-                    elif handle_nbt[0] == "AttributeName":
-                        modifier += "type:"+ handle_nbt[1] + ","
-                    elif handle_nbt[0] == "Amount":
-                        modifier += "amount:"+ handle_nbt[1] + ","
-                    elif handle_nbt[0] == "Slot":
-                        modifier += "slot:"+ handle_nbt[1] + ","
+                            modifier += "\"operation\":'add_multiplied_total',"
+                    elif handle_nbt[0][1:-1] == "Name" or handle_nbt[0] == "Name":
+                        modifier += "\"name\":"+ handle_nbt[1] + ","
+                    elif handle_nbt[0][1:-1] == "AttributeName" or handle_nbt[0] == "AttributeName":
+                        modifier += "\"type\":"+ handle_nbt[1] + ","
+                    elif handle_nbt[0][1:-1] == "Amount" or handle_nbt[0] == "Amount":
+                        modifier += "\"amount\":"+ handle_nbt[1] + ","
+                    elif handle_nbt[0][1:-1] == "Slot" or handle_nbt[0] == "Slot":
+                        modifier += "\"slot\":"+ handle_nbt[1] + ","
                 modifier = modifier[:-1] + "}"
                 modifiers += modifier + ","
             modifiers = "modifiers:[" + modifiers[:-1] + "]" 
@@ -1353,3 +1353,5 @@ print(done())
     
 # print(itemType("minecraft:barrel"))
 # print(updateNBTName("Unbreakable"))
+#print(updateNBT("AttributeModifiers","[{\"AttributeName\":\"generic.attack_damage\",\"Name\":\"abc\"}]"))
+#print(updateNBT("display","{Name:abs}"))
